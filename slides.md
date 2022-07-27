@@ -34,21 +34,6 @@ to build reliable and efficient software.
 
 ---
 
-# Why is it fast?
-
-* Compiled to machine code
-* No runtime
-* No garbage collector
-* Static dispatch by default
-* Zero cost abstractions
-* A syntax designed for performance
-  * Low level access to memory management
-  * Costly operation must be explicit and stand out when reading the code
-  * Great benchmarking tools
-  * Performance focused ecosystem and community
-
----
-
 # Tour of the language - Hello world
 
 ```rust
@@ -132,6 +117,21 @@ impl Container for String {
 
 ---
 
+# Why is it fast?
+
+* Compiled to machine code
+* No runtime
+* No garbage collector
+* Static dispatch by default
+* Zero cost abstractions
+* A syntax designed for performance
+  * Low level access to memory management
+  * Costly operation must be explicit and stand out when reading the code
+  * Great benchmarking tools
+  * Performance focused ecosystem and community
+
+---
+
 # Memory ownership - scope
 
 When a an instance reaches the end of a scope, the memory is immediately freed.
@@ -157,7 +157,7 @@ fn foo(s: String) {
 
 ```rust
 let s = String::from("Hello");
-foo(s); // s1 is moved to the scope of bar
+foo(s); // s1 is moved to the scope of f
 println!("s: ${s}"); // compilation error
 ```
 
@@ -239,4 +239,4 @@ println!("s: ${s}"); // works fine
 
 <!-- We are hiring -->
 
-<img src="assets/slides_qrcode.png" width="300" />
+![bg 25%](assets/slides_qrcode.png)
