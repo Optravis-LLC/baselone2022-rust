@@ -1,1 +1,13 @@
-/deck
+# Nodes
+/node_modules/
+*.html
+
+# IDE
+/.idea
+/.vscode
+*.iml
+
+# Operating systems
+.DS_Store
+.trashes
+*.db

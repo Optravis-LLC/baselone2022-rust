@@ -1,18 +1,20 @@
 ---
+marp: true
 title: Build trust with rust
-pdf: build-trust-with-rust.pdf
-slideNumber: true
-controls: true
+author: Jonathan Cornaz
 ---
 
 # Build trust with rust
 
+---
 
 # Jonathan Cornaz
 
 ![](fab fa-github) [jcornaz](https://github.com/jcornaz)
 
 ![](https://static.wixstatic.com/media/3f78ef_8c02390aed384d6982039a6bac5628eb~mv2.png/v1/fill/w_219,h_52,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo_optravis_RGB.png)
+
+---
 
 # Rust
 
@@ -30,6 +32,7 @@ to build reliable and efficient software.
   <!-- not as much as Kotlin, but still quite good -->
   <!-- much better than c/c++ -->
 
+---
 
 # Why is it fast?
 
@@ -44,6 +47,8 @@ to build reliable and efficient software.
   * Great benchmarking tools
   * Performance focused ecosystem and community
 
+---
+
 # Tour of the language - Hello world
 
 ```rust
@@ -52,12 +57,16 @@ fn main() {
 }
 ```
 
+---
+
 # Tour of the language - Types
 
 * struct
 * tuple
 * array
  
+---
+
 # Tour of the language - Type inference
 
 ```rust
@@ -79,6 +88,8 @@ fn main() {
 }
 ```
 
+---
+
 # Tour of the language - Functions and methods
 
 ```rust
@@ -95,6 +106,8 @@ fn main() {
   x.a_method();
 }
 ```
+
+---
 
 # Tour of the language - Traits
 
@@ -117,6 +130,8 @@ impl Container for String {
 }
 ```
 
+---
+
 # Memory ownership - scope
 
 When a an instance reaches the end of a scope, the memory is immediately freed.
@@ -129,6 +144,8 @@ fn foo() {
   } // s2 is de-allocated
 } // s1 is de-allocated
 ```
+
+---
 
 # Memory ownership - move semantic
 
@@ -144,6 +161,8 @@ foo(s); // s1 is moved to the scope of bar
 println!("s: ${s}"); // compilation error
 ```
 
+---
+
 # Memory ownership - shared reference
 
 ```rust
@@ -157,6 +176,8 @@ let s = String::from("Hello");
 foo(&s); // a reference to s1 is shared
 println!("s: ${s}"); // works fine
 ```
+
+---
 
 # Memory ownership - mutable reference
 
@@ -172,29 +193,47 @@ foo(&mut s); // a mutable reference to s1 is shared
 println!("s: ${s}"); // works fine
 ```
 
+---
+
 # Idioms - Option instead of null
+
+---
 
 # Idioms - Result instead of exception
 
+---
+
 # Idioms - Iterators
+
+---
 
 # Macros
 
+---
+
 # Tools
+
+---
 
 # What are the tradeoffs
 
 * Steep learning curve
 * More syntax friction
 
+---
+
 # Learning resources
 
 * The rust book
 * Rustlings
 
+---
+
 # Questions
 
 <!-- TODO anticipate the most likely questions -->
+
+---
 
 # Thank you
 

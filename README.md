@@ -2,8 +2,13 @@
 
 Presentation for Basel One 2022
 
-## Start the presentation
+## Build the presentation
+
+Generate `slides.html`
 
 ```sh
-./markdeck start
+npm install
+npm run build
 ```
+
+For live update when working with the presentation: `npm run start`
