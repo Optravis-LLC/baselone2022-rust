@@ -8,9 +8,11 @@ controls: true
 # Build trust with rust
 
 
-# About me
+# Jonathan Cornaz
 
 ![](fab fa-github) [jcornaz](https://github.com/jcornaz)
+
+![](https://static.wixstatic.com/media/3f78ef_8c02390aed384d6982039a6bac5628eb~mv2.png/v1/fill/w_219,h_52,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo_optravis_RGB.png)
 
 # Rust
 
@@ -28,13 +30,71 @@ to build reliable and efficient software.
   <!-- not as much as Kotlin, but still quite good -->
   <!-- much better than c/c++ -->
 
+
+# Why is it fast?
+
+* Compiled to machine code
+* No runtime
+* No garbage collector
+* Static dispatch by default
+* Zero cost abstractions
+* A syntax designed for performance
+  * Low level access to memory management
+  * Costly operation must be explicit and stand out when reading the code
+  * Great benchmarking tools
+  * Performance focused ecosystem and community
+
+# Tour of the language - Hello world
+
+```rust
+fn main() {
+  println!("Hello Basel One!");
+}
+```
+
 # Tour of the language - Types
 
 * struct
 * tuple
 * array
+ 
+# Tour of the language - Type inference
+
+```rust
+let x: String = String::new();
+```
+
+```rust
+let x = String::new();
+```
+
+```rust
+fn new_vec<Vec<T>>() -> T { Vec::new() }
+
+fn foo(v: Vec<String>) {}
+
+fn main() {
+  let v = new_vec(); // v is inferred to `Vec<String>`
+  foo(v);
+}
+```
 
 # Tour of the language - Functions and methods
+
+```rust
+fn a_top_level_function(s: String) -> usize { ... }
+
+impl MyStruct {
+  fn a_static_function(x: bool) -> Self { ... }
+  fn new() -> Self { ... }
+  fn a_method(self, a: f32, b: String) { ... }
+}
+
+fn main() {
+  let x = MyStruct::new();
+  x.a_method();
+}
+```
 
 # Tour of the language - Traits
 
@@ -43,11 +103,19 @@ But it does have traits and generics.
 
 A trait is like an interface, with some differences:
 
-* Can define methods and *functions*
-* Can use `Self`
-* May be implemented on third party types
+```rust
+trait Container {
+  fn empty() -> Self;
+  fn len(&self) -> usize;
+}
+```
 
-# Tour of the language - Static dispatch
+```rust
+impl Container for String {
+  fn empty() -> Self { String::new() }
+  fn len(&self) -> usize { String::len(self) }
+}
+```
 
 # Memory ownership - scope
 
