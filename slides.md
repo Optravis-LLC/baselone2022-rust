@@ -186,3 +186,18 @@ println!("s: ${s}"); // works fine
 
 * Steep learning curve
 * More syntax friction
+
+# Learning resources
+
+* The rust book
+* Rustlings
+
+# Questions
+
+<!-- TODO anticipate the most likely questions -->
+
+# Thank you
+
+<!-- We are hiring -->
+
+<img src="assets/slides_qrcode.png" width="300" />
