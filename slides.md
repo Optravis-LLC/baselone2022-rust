@@ -2,24 +2,34 @@
 marp: true
 title: Build trust with rust
 author: Jonathan Cornaz
+theme: uncover
+backgroundColor: gaia
 ---
+
+<style>
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+</style>
 
 # Build trust with rust
 
 ---
 
-# Jonathan Cornaz
+![width:500](https://static.wixstatic.com/media/3f78ef_8c02390aed384d6982039a6bac5628eb~mv2.png)
 
-![](fab fa-github) [jcornaz](https://github.com/jcornaz)
 
-![](https://static.wixstatic.com/media/3f78ef_8c02390aed384d6982039a6bac5628eb~mv2.png/v1/fill/w_219,h_52,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo_optravis_RGB.png)
+**Jonathan Cornaz**
+
+<i class="fa fa-github" aria-hidden="false"></i> [jcornaz](https://github.com/jcornaz)
+
 
 ---
 
-# Rust
+![width:250](assets/rust-logo.svg)
 
 > A language empowering everyone
 to build reliable and efficient software.
+
+---
 
 * Fast
   <!-- compiled to machine code -->
@@ -34,7 +44,9 @@ to build reliable and efficient software.
 
 ---
 
-# Tour of the language - Hello world
+# Tour of the language
+
+---
 
 ```rust
 fn main() {
@@ -44,15 +56,13 @@ fn main() {
 
 ---
 
-# Tour of the language - Types
-
 * struct
 * tuple
 * array
  
 ---
 
-# Tour of the language - Type inference
+<!-- Type inference -->
 
 ```rust
 let x: String = String::new();
@@ -62,11 +72,19 @@ let x: String = String::new();
 let x = String::new();
 ```
 
+---
+
+<!-- Type inference, continued -->
+
 ```rust
 fn new_vec<Vec<T>>() -> T { Vec::new() }
+```
 
+```rust
 fn foo(v: Vec<String>) {}
+```
 
+```rust
 fn main() {
   let v = new_vec(); // v is inferred to `Vec<String>`
   foo(v);
@@ -75,17 +93,21 @@ fn main() {
 
 ---
 
-# Tour of the language - Functions and methods
+# Functions and methods
 
 ```rust
 fn a_top_level_function(s: String) -> usize { ... }
+```
 
+```rust
 impl MyStruct {
   fn a_static_function(x: bool) -> Self { ... }
   fn new() -> Self { ... }
   fn a_method(self, a: f32, b: String) { ... }
 }
+```
 
+```rust
 fn main() {
   let x = MyStruct::new();
   x.a_method();
@@ -94,12 +116,7 @@ fn main() {
 
 ---
 
-# Tour of the language - Traits
-
-Trust does not have implementation inheritance.
-But it does have traits and generics.
-
-A trait is like an interface, with some differences:
+# Traits
 
 ```rust
 trait Container {
@@ -117,6 +134,20 @@ impl Container for String {
 
 ---
 
+# Absent by design
+
+* No inheritance -> use traits and composition
+* No reflection -> use macros
+* No null -> use `Option` instead
+* No exception
+  * `Result` for recoverable errors
+    <!-- Examples: Network unavailable, Incorrect user-input, File not found, etc. -->
+  * panic for unrecoverable errors
+    <!-- Programming mistakes, like index out of bounds -->
+    <!-- Out of memory -->
+
+---
+
 # Why is it fast?
 
 * Compiled to machine code
@@ -124,7 +155,10 @@ impl Container for String {
 * No garbage collector
 * Static dispatch by default
 * Zero cost abstractions
-* A syntax designed for performance
+
+---
+
+# A syntax designed for performance
   * Low level access to memory management
   * Costly operation must be explicit and stand out when reading the code
   * Great benchmarking tools
@@ -132,7 +166,7 @@ impl Container for String {
 
 ---
 
-# Memory ownership - scope
+# Scope
 
 When a an instance reaches the end of a scope, the memory is immediately freed.
 
@@ -147,7 +181,7 @@ fn foo() {
 
 ---
 
-# Memory ownership - move semantic
+# Move semantic
 
 ```rust
 fn foo(s: String) {
@@ -163,7 +197,7 @@ println!("s: ${s}"); // compilation error
 
 ---
 
-# Memory ownership - shared reference
+# Shared reference
 
 ```rust
 fn foo(s: &String) {
@@ -179,7 +213,7 @@ println!("s: ${s}"); // works fine
 
 ---
 
-# Memory ownership - mutable reference
+# Mutable reference
 
 ```rust
 fn foo(s: &String) {
@@ -195,15 +229,11 @@ println!("s: ${s}"); // works fine
 
 ---
 
-# Idioms - Option instead of null
+# Iterators
 
 ---
 
-# Idioms - Result instead of exception
-
----
-
-# Idioms - Iterators
+# Pattern matching
 
 ---
 
@@ -239,4 +269,7 @@ println!("s: ${s}"); // works fine
 
 <!-- We are hiring -->
 
-![bg 25%](assets/slides_qrcode.png)
+![width:300](assets/slides_qrcode.png)
+
+*slides*
+

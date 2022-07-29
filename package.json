@@ -3,8 +3,8 @@
   "description": "Presentation for Basel One 2022",
   "author": "Jonathan Cornaz",
   "scripts": {
-    "build": "marp slides.md",
-    "start": "marp -sw ."
+    "build": "marp --html slides.md",
+    "start": "marp --html -sw ."
   },
   "repository": {
     "type": "git",
