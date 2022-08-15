@@ -12,6 +12,6 @@
   },
   "homepage": "https://github.com/Optravis-LLC/baselone2022-rust#readme",
   "devDependencies": {
-    "@marp-team/marp-cli": "^2.0.4"
+    "@marp-team/marp-cli": "2.1.2"
   }
 }
