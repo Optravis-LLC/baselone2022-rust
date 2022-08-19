@@ -19,7 +19,7 @@ highlighter: shiki
 class: 'text-center'
 ---
 
-![width:250](assets/rust-logo.svg)
+![width:250](/rust-logo.svg)
 
 > A language empowering everyone
 to build reliable and efficient software.
