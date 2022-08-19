@@ -13,14 +13,10 @@ highlighter: shiki
 
 ---
 
-![width:500](https://static.wixstatic.com/media/3f78ef_8c02390aed384d6982039a6bac5628eb~mv2.png)
+# About ne
 
-
-**Jonathan Cornaz**
-
-<i class="fa fa-github" aria-hidden="false"></i> [jcornaz](https://github.com/jcornaz)
-
-
+---
+class: 'text-center'
 ---
 
 ![width:250](assets/rust-logo.svg)
@@ -31,119 +27,8 @@ to build reliable and efficient software.
 ---
 
 * Fast
-  <!-- compiled to machine code -->
-  <!-- no runtime, no garbage collector -->
-  <!-- as fast as c/c++ -->
 * Safe
-  <!-- very strict compiler -->
-  <!-- "if it compiles it works" philosophy -->
 * Productive
-  <!-- not as much as Kotlin, but still quite good -->
-  <!-- much better than c/c++ -->
-
----
-
-# Tour of the language
-
----
-
-```rust
-fn main() {
-  println!("Hello Basel One!");
-}
-```
-
----
-
-* struct
-* tuple
-* array
- 
----
-
-<!-- Type inference -->
-
-```rust
-let x: String = String::new();
-```
-
-```rust
-let x = String::new();
-```
-
----
-
-<!-- Type inference, continued -->
-
-```rust
-fn new_vec<Vec<T>>() -> T { Vec::new() }
-```
-
-```rust
-fn foo(v: Vec<String>) {}
-```
-
-```rust
-fn main() {
-  let v = new_vec(); // v is inferred to `Vec<String>`
-  foo(v);
-}
-```
-
----
-
-# Functions and methods
-
-```rust
-fn a_top_level_function(s: String) -> usize { ... }
-```
-
-```rust
-impl MyStruct {
-  fn a_static_function(x: bool) -> Self { ... }
-  fn new() -> Self { ... }
-  fn a_method(self, a: f32, b: String) { ... }
-}
-```
-
-```rust
-fn main() {
-  let x = MyStruct::new();
-  x.a_method();
-}
-```
-
----
-
-# Traits
-
-```rust
-trait Container {
-  fn empty() -> Self;
-  fn len(&self) -> usize;
-}
-```
-
-```rust
-impl Container for String {
-  fn empty() -> Self { String::new() }
-  fn len(&self) -> usize { String::len(self) }
-}
-```
-
----
-
-# Absent by design
-
-* No inheritance -> use traits and composition
-* No reflection -> use macros
-* No null -> use `Option` instead
-* No exception
-  * `Result` for recoverable errors
-    <!-- Examples: Network unavailable, Incorrect user-input, File not found, etc. -->
-  * panic for unrecoverable errors
-    <!-- Programming mistakes, like index out of bounds -->
-    <!-- Out of memory -->
 
 ---
 
@@ -228,6 +113,24 @@ println!("s: ${s}"); // works fine
 
 ---
 
+# Traits
+
+```rust
+trait Container {
+  fn empty() -> Self;
+  fn len(&self) -> usize;
+}
+```
+
+```rust
+impl Container for String {
+  fn empty() -> Self { String::new() }
+  fn len(&self) -> usize { String::len(self) }
+}
+```
+
+---
+
 # Iterators
 
 ---
@@ -266,9 +169,4 @@ println!("s: ${s}"); // works fine
 
 # Thank you
 
-<!-- We are hiring -->
-
-![width:300](assets/slides_qrcode.png)
-
-*slides*
-
+<!-- TODO add link to slides -->
