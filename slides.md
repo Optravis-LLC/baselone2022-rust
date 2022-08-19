@@ -1,9 +1,8 @@
 ---
-marp: true
-title: Build trust with rust
-author: Jonathan Cornaz
-theme: uncover
-backgroundColor: gaia
+theme: default
+background: https://source.unsplash.com/1600x900/?rust
+class: 'text-center'
+highlighter: shiki
 ---
 
 <style>

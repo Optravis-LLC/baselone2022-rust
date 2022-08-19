@@ -1,17 +1,14 @@
 {
   "name": "baselone2022-rust",
-  "description": "Presentation for Basel One 2022",
-  "author": "Jonathan Cornaz",
+  "private": true,
   "scripts": {
-    "build": "marp --html slides.md",
-    "start": "marp --html -sw ."
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Optravis-LLC/baselone2022-rust.git"
-  },
-  "homepage": "https://github.com/Optravis-LLC/baselone2022-rust#readme",
-  "devDependencies": {
-    "@marp-team/marp-cli": "2.1.2"
+  "dependencies": {
+    "@slidev/cli": "^0.35.5",
+    "@slidev/theme-default": "*",
+    "@slidev/theme-seriph": "*"
   }
 }

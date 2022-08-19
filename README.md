@@ -2,13 +2,24 @@
 
 Presentation for Basel One 2022
 
-## Build the presentation
+## Setup 
 
-Generate `slides.html`
+### Install dependencies first
 
 ```sh
 npm install
-npm run build
 ```
 
-For live update when working with the presentation: `npm run start`
+### Run development preview
+
+```sh
+npm run dev
+```
+
+Checkout the [slidev documentation](https://sli.dev/)
+
+## Build the presentation
+
+```sh
+npm run build
+```
