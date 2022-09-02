@@ -13,13 +13,11 @@ highlighter: shiki
 
 ---
 
-# No garbage collector
+## No garbage collector
 
 rust code is compiled to machine code, and doesn't need any runtime to be executed
 
 ---
-
-# No garbage collector
 
 ```rust {1,4|2|all}
 let s = String::from("hello world"); // allocate a new string (on the heap)
@@ -28,7 +26,7 @@ drop(s); // deallocate
 
 ---
 
-# Automatic, immediate memory free
+## Automatic, immediate memory free
 
 ```rust
 fn foo() {
@@ -41,17 +39,17 @@ fn foo() {
 
 ---
 
-# No use after free
+## No use after free
 
 ```rust {1,4|1,2,4|all}
-let s = String::from("hello world"); 
+let s = String::from("hello world");
 drop(s);
-println!("{s}"); // compile error! 
+println!("{s}"); // compile error!
 ```
 
 ---
 
-# No double free
+## No double free
 
 ```rust {14|1,2,4|all}
 let s = String::from("hello world"); 
@@ -61,7 +59,7 @@ drop(s); // compile error!
 
 ---
 
-# No dangling pointer
+## No dangling pointer
 
 ```rust {1,3|2}
 fn foo() -> &String {
