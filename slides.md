@@ -33,9 +33,11 @@ highlighter: shiki
 
 ## Core design choices
 
-* Compiled to machine code (no runtime)
+No runtime
+
+* Compiled to machine code
 * No garbage collector
-* Yet safe and productive
+* Borrow checker
 
 ---
 
@@ -58,7 +60,7 @@ Rust fails *at compile time* if it detects:
 
 ```rust
 fn foo() {
-  let s1 = String::from("hello "); // allocate a new string
+  let s1 = String::from("hello ");
   { 
     let s2 = String::from("world!");
   } // s2 is droped
@@ -67,6 +69,8 @@ fn foo() {
 
 <!--
 * Quick intro to the presented rust syntax
+* Type inference
+* Mention why we I use string for the examples
 * Introduce the concept of "scope"
 * The compiler automatically injects deallocation code.
 -->
@@ -79,13 +83,75 @@ Ownership may be transfered
 
 ```rust
 fn foo() {
-  let s1 = String::from("hello world!"); // allocate a new string
+  let s1 = String::from("hello world!");
   let s3 = { 
     let s2 = s1; // move s1 to s2
     s2 // move s2 to s3
   };
 } // s3 is droped
 ```
+
+---
+
+## Move between functions
+
+```rust
+fn foo(s: String) { 
+  println!(s);
+  s
+}
+
+fn main() {
+  let s1 = String::from("hello world");
+  // s1 is moved to `foo`
+  // the result of `foo` is moved to s2
+  let s2 = foo(s1);
+} // s2 is droped
+```
+<!--
+Ownership can be transfered via:
+* Function argument
+* Return value
+-->
+
+---
+
+## Use after free
+
+```rust
+fn foo(s: String) {
+  println!("{s}");
+} // s is droped
+
+fn main() {
+  let s = String::new();
+  foo(s); // transfer ownership to `foo`
+  foo(s); // compile error!
+}
+```
+
+---
+
+## Use after free error
+
+![move error](/move_error.png)
+
+---
+
+## A note about `Copy`
+
+```rust
+fn foo(num: i32) {
+  println!("{s}");
+}
+
+fn main() {
+  let num = 42;
+  foo(num); // copy
+  foo(num); // copy
+}
+```
+
 ---
 
 ## Memory references
@@ -106,34 +172,46 @@ fn take_read_only_ref(s: &String) {
 }
 ```
 
----
+--- 
 
-## Use after free
+## Create reference
 
 ```rust
-let s = String::from("hello world");
-drop(s);
-println!("{s}"); // compile error!
+let s1 = String::new();
+take_read_only_ref(&s1);
+
+let mut s2 = String::new();
+take_mutable_ref(&mut s2);
+
+// is implicit for methods
+s2.len(); // equivalent to `String::len(&s2)`
+s2.push_str("hello"); // equivalent to `String::push_str(&mut s2)`
 ```
 
 ---
 
-## No double free
+## No concurrent access on mutable data
 
 ```rust
-let s = String::from("hello world"); 
-drop(s);
-drop(s); // compile error! 
+let mut owner = String::new();
+let read_only = &owner; // read-only ref
+owner.push_str("Hello"); // mutable ref
+read_only.len(); // Compile error!
 ```
+
+---
+
+## Concurrent borrow error
+
+![borrow error](/borrow_error.png)
 
 ---
 
 ## No dangling pointer
 
 ```rust
-fn foo() -> &String {
-  &String::from("hello world") // compile error!
-}
+fn foo(s: String) -> &String {
+  &s // compile error! (s does not live long enough)
+} // s is droped
 ```
 
-<!-- memory management mistakes are compile-time error -->
