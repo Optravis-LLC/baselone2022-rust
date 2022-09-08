@@ -39,28 +39,6 @@ highlighter: shiki
 
 ---
 
-## Memory is automatically deallocated when out of scope
-
-```rust
-fn foo() {
-  let s1 = String::from("hello "); // allocate a new string
-  { 
-    let s2 = String::from("world!");
-  } // s2 is free
-} // s1 is free
-
-```
-
-<!--
-Introduce the concept of "scope"
-
-Mention:
-* the compiler automatically injects deallocation code.
-* memory leaks are not so easy to introduce.
--->
-
----
-
 ## Memory safe
 
 Rust fails *at compile time* if it detects:
@@ -72,7 +50,45 @@ Rust fails *at compile time* if it detects:
 
 ---
 
-## Memory ownership model - References
+## Memory ownership rules
+
+* Each value has an owner.
+* There can only be one owner at a time.
+* When the owner goes out of scope, the value will be dropped.
+
+```rust
+fn foo() {
+  let s1 = String::from("hello "); // allocate a new string
+  { 
+    let s2 = String::from("world!");
+  } // s2 is droped
+} // s1 is droped
+```
+
+<!--
+* Quick intro to the presented rust syntax
+* Introduce the concept of "scope"
+* The compiler automatically injects deallocation code.
+-->
+
+---
+
+## Move semantic
+
+Ownership may be transfered
+
+```rust
+fn foo() {
+  let s1 = String::from("hello world!"); // allocate a new string
+  let s3 = { 
+    let s2 = s1; // move s1 to s2
+    s2 // move s2 to s3
+  };
+} // s3 is droped
+```
+---
+
+## Memory references
 
 ```rust
 fn take_mutable_ref(s: &mut String) {
@@ -82,41 +98,17 @@ fn take_mutable_ref(s: &mut String) {
   println!("{s}");
 }
 
-fn take_shared_ref(s: &String) {
+fn take_read_only_ref(s: &String) {
   // The reference is guarandeed to live at least for as long as the scope.
   println!("{s}");
-  // There may be other scopes with concurrent access 
+  // There may be other scopes with concurrent access. 
   s.push_str("!"); // <-- Compile error
 }
 ```
 
 ---
 
-## Memory ownership
-
-```rust
-fn take_ownership(mut s: String) -> String {
-  // The memory will be deallocated when the owned value reaches the end of scope
-  
-  // It can create a share reference
-  take_shared_ref(&s);
-  
-  // It can create a mutable reference
-  take_mutable_ref(&mut s);
-
-  return s // <-- to return is transfering ownership to the scope of the caller
-}
-
-fn main() {
-  let s1 = String::from("Hello world!");
-  take_ownership(s1);
-  println!("{s1}"); // compile error (s1 has been moved to `take_ownership`)
-}
-```
-
----
-
-## No use after free
+## Use after free
 
 ```rust
 let s = String::from("hello world");
