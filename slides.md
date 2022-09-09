@@ -13,10 +13,6 @@ highlighter: shiki
 
 ---
 
-<!-- TODO presentation slide -->
-
----
-
 ## Rust
 
 > A language empowering everyone to build reliable and efficient software.
@@ -37,9 +33,48 @@ highlighter: shiki
 * No garbage collector
 * Borrow checker
 
+<!--
+No runtime -> Fast
+Borrow checker -> Safe
+-->
+
 ---
 
-## Memory safe
+## Stack vs heap
+
+```rust {1|1,2,3,8|4|6-7}
+struct Vector { x: i32, y: i32, z: i32 }
+
+fn main() {
+  let on_stack = Vector { x: 0, y: 0, z: 0 };
+  
+  // Anything that has negative impact must be explicit
+  let on_heap = Box::new(Vector { x: 0, y: 0, z: 0 });
+}
+```
+
+---
+
+## Static dispatch by default
+
+```rust
+struct Vector { x: i32, y: i32 }
+
+impl Vector {
+  fn dot(self, other: Self) -> Self {
+    (self.x * other.x) + (self.y * other.y)
+  }
+}
+
+fn main() {
+  let v = Vector { x: 0, y: 0 }
+  let dot = v.dot(Vector { x: 0, y: 1 });
+}
+```
+
+---
+
+## No GC, yet memory safe!
 
 * no use after free
 * no double free
