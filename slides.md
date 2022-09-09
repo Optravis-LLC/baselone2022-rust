@@ -33,8 +33,6 @@ highlighter: shiki
 
 ## Core design choices
 
-No runtime
-
 * Compiled to machine code
 * No garbage collector
 * Borrow checker
@@ -43,12 +41,10 @@ No runtime
 
 ## Memory safe
 
-Rust fails *at compile time* if it detects:
-
-* use after free
-* double free
-* dangling pointer
-* data race
+* no use after free
+* no double free
+* no dangling pointer
+* no data race
 
 ---
 
@@ -58,7 +54,7 @@ Rust fails *at compile time* if it detects:
 * There can only be one owner at a time.
 * When the owner goes out of scope, the value will be dropped.
 
-```rust
+```rust {1|1,2|3|3,4|3-5|1,2,6|all}
 fn foo() {
   let s1 = String::from("hello ");
   { 
@@ -91,16 +87,14 @@ fn foo() {
 } // s3 is droped
 ```
 
----
-
-## Move between functions
-
 ```rust
 fn foo(s: String) { 
   println!(s);
   s
 }
+```
 
+```rust
 fn main() {
   let s1 = String::from("hello world");
   // s1 is moved to `foo`
@@ -122,50 +116,52 @@ Ownership can be transfered via:
 fn foo(s: String) {
   println!("{s}");
 } // s is droped
-
+```
+```rust {monaco}
 fn main() {
   let s = String::new();
   foo(s); // transfer ownership to `foo`
-  foo(s); // compile error!
+  foo(s); // compile error! (use after free)
 }
 ```
 
----
-
-## Use after free error
+<!--
+"double free" is also prevented the same way, as it is a special case of "use after free"
+-->
 
 ![move error](/move_error.png)
 
 ---
 
-## A note about `Copy`
+## The Copy trait
 
 ```rust
 fn foo(num: i32) {
   println!("{s}");
 }
-
+```
+```rust
 fn main() {
   let num = 42;
   foo(num); // copy
-  foo(num); // copy
+  foo(num); // copy (no error)
 }
 ```
 
 ---
 
-## Memory references
+## References
 
 ```rust
 fn take_mutable_ref(s: &mut String) {
-  // The reference is guarandeed to live at least for as long as the scope.
+  // The reference is guarandeed to live for at least as long as the scope.
   s.push_str("!");
   // This scope has exclusive access to the reference.
   println!("{s}");
 }
 
 fn take_read_only_ref(s: &String) {
-  // The reference is guarandeed to live at least for as long as the scope.
+  // The reference is guarandeed to live for at least as long as the scope.
   println!("{s}");
   // There may be other scopes with concurrent access. 
   s.push_str("!"); // <-- Compile error
@@ -174,7 +170,7 @@ fn take_read_only_ref(s: &String) {
 
 --- 
 
-## Create reference
+## Create references
 
 ```rust
 let s1 = String::new();
@@ -199,19 +195,32 @@ owner.push_str("Hello"); // mutable ref
 read_only.len(); // Compile error!
 ```
 
----
-
-## Concurrent borrow error
-
-![borrow error](/borrow_error.png)
+![concurrent borrow errow](/concurrent_borrow_error.png)
 
 ---
 
-## No dangling pointer
+## Use after free on reference
+
+Reference must always be valid
 
 ```rust
-fn foo(s: String) -> &String {
-  &s // compile error! (s does not live long enough)
-} // s is droped
+let owner = String::new();
+let reference = &owner;
+drop(owner); // move ownership
+reference.len(); // Compile error!
 ```
 
+![borrow after move error](/borrow_after_move_error.png)
+
+-----
+
+## Dangling pointer
+
+```rust
+fn foo() -> &String {
+  let s = String::new();
+  &s
+}
+```
+
+![](/dangling_ref_error.png)
