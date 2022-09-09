@@ -54,7 +54,7 @@ highlighter: shiki
 * There can only be one owner at a time.
 * When the owner goes out of scope, the value will be dropped.
 
-```rust {1|1,2|3|3,4|3-5|1,2,6|all}
+```rust {1|1,2|3,4|3-5|1,2,6|all}
 fn foo() {
   let s1 = String::from("hello ");
   { 
@@ -201,8 +201,6 @@ read_only.len(); // Compile error!
 
 ## Use after free on reference
 
-Reference must always be valid
-
 ```rust
 let owner = String::new();
 let reference = &owner;
@@ -212,7 +210,7 @@ reference.len(); // Compile error!
 
 ![borrow after move error](/borrow_after_move_error.png)
 
------
+---
 
 ## Dangling pointer
 
@@ -224,3 +222,75 @@ fn foo() -> &String {
 ```
 
 ![](/dangling_ref_error.png)
+
+---
+
+## Lifetimes
+
+```rust
+fn trim<'a>(s: &'a str) -> &'a str {
+  s.trim()
+}
+```
+
+```rust
+fn trim(s: &str) -> &str {
+  s.trim()
+}
+```
+
+<!-- 
+Note the use of `str` instead of `String`
+-->
+
+---
+
+## Option
+
+```rust
+enum Option<T> {
+  Some(T),
+  None,
+}
+```
+```rust
+fn may_return_something() -> Option<i32> {
+  Some(32)
+}
+```
+```rust
+match may_return_something() {
+  Some(v) => println!("The value is: {v}"),
+  None => println!("There is no value"),
+}
+```
+
+---
+
+## Result
+
+```rust
+enum Result<T, E> {
+  Ok(T),
+  Err(E),
+}
+```
+
+```rust
+fn may_fail() -> Result<i32, &str> {
+  Err("Oops...")
+}
+```
+
+```rust
+match may_fail() {
+  Ok(v) => println!("The value is: {v}"),
+  Err(err) => println!("Error! {err}"),
+}
+```
+
+<!-- 
+I ues `&str` for the examble, in practice we define error types.
+-->
+
+---
