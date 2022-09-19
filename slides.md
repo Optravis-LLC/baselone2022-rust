@@ -48,27 +48,23 @@ struct Vector { x: i32, y: i32, z: i32 }
 fn main() {
   let on_stack = Vector { x: 0, y: 0, z: 0 };
   
-  // Anything that has negative impact must be explicit
+  // Anything that has negative performance impact must be explicit
   let on_heap = Box::new(Vector { x: 0, y: 0, z: 0 });
 }
 ```
 
----
+--
 
-## Static dispatch by default
+## Static dispatch (and monomorphisation)
 
 ```rust
-struct Vector { x: i32, y: i32 }
-
-impl Vector {
-  fn dot(self, other: Self) -> Self {
-    (self.x * other.x) + (self.y * other.y)
-  }
+fn say_hello<T : Display>(name: T) {
+  println!("Hello {name}!");
 }
 
 fn main() {
-  let v = Vector { x: 0, y: 0 }
-  let dot = v.dot(Vector { x: 0, y: 1 });
+  say_hello("world"); // call say_hello_str(name: &str)
+  say_hello(5); // call say_hello_i32(name: i32)
 }
 ```
 
