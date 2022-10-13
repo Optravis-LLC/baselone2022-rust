@@ -27,6 +27,91 @@ highlighter: shiki
 
 ---
 
+## Hello world
+
+```rust
+fn main() {
+  println!("Hello world!");
+}
+
+```
+
+```rust
+fn foo(a: i32, b: i32) -> i32 {
+  a + b
+}
+
+fn main() {
+  let x = foo(1, 2);
+  println!("{x}");
+}
+```
+
+---
+
+## Structs
+
+```rust
+struct Vector {
+  x: i32,
+  y: i32,
+}
+
+struct Unit;
+```
+
+---
+
+## Enums and matching
+
+```rust
+enum Stuff {
+  Unit,
+  WithData(f32),
+  WithStructuredData {
+    x: i32,
+    y: i32,
+  }
+}
+
+fn foo(s: Stuff) -> String {
+  match s {
+    Stuff::Unit => String::from("unit"),
+    Stuff::WithData(v) => v.to_string(),
+    Stuff::WithStructuredData { x, y } => format!("({x}, {y})"),
+  }
+}
+```
+
+---
+
+## Methods
+
+```rust
+struct Vector {
+  x: i32,
+  y: i32,
+}
+
+impl Vector {
+  fn new(x: i32, y: i32) -> Self {
+    Self { x, y }
+  }
+  
+  fn dot(self, other: Self) -> i32 {
+    self.x * other.x + self.y * other.y
+  }
+}
+
+fn main() {
+  let v1 = Vector::new(1, 2);
+  let v2 = Vector::new(3, 4);
+  let dot = v1.dot(v2);
+}
+```
+
+---
+
 ## Rust
 
 > A *language* empowering everyone to build *reliable* and *efficient* software.
