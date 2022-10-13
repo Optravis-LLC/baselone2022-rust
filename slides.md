@@ -13,6 +13,20 @@ highlighter: shiki
 
 ---
 
+## About me
+
+> **Jonathan Cornaz**
+> 
+> Senior software developer at Optravis
+
+* Mainly Java from 2010 to 2016
+* Mainly Kotlin since 2016
+* Rust for hobby projects since 2022
+  * benimator: A sprite animation library
+  * beancount-parser: A parser for beancount files
+
+---
+
 ## Rust
 
 > A *language* empowering everyone to build *reliable* and *efficient* software.
