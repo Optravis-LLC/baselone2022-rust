@@ -1,3 +1,7 @@
+fn drop(s: String) {}
+
 fn main() {
-    println!("Hello, world!");
+    let s = String::new();
+    drop(s);
+    println!("{s}");
 }
