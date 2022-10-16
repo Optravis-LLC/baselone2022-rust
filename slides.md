@@ -41,13 +41,10 @@ highlighter: shiki
 
 ## Agenda
 
-* Intro to the language
+* Tour of the language syntax
 * Memory ownership system
 * Error management
-
-<!-- TODO Iterators -->
-<!-- TODO Macros -->
-<!-- TODO Ecosystem -->
+* The Ecosystem and tools
 
 ---
 
@@ -244,6 +241,22 @@ Generic functions are monomorphised
 
 ---
 
+## iterators
+
+```rust
+fn main() {
+  (0..100)
+    .filter(|n| *n % 2 == 0)
+    .map(|n| n + 1)
+    .map(i32::to_string)
+    .for_each(|v| {
+      println!("{v}");
+    })
+}  
+```
+
+---
+
 ## No GC, yet memory safe!
 
 <v-clicks>
@@ -258,24 +271,30 @@ Generic functions are monomorphised
 
 ---
 
-## Memory ownership rules
+## Memory ownership model
 
-<v-clicks>
 
-* Each value has an exactly one owner
-* At the end of owner's scope, the memory is freed
+* Ownership (example: `String`)
+  * Each value as exactly one owner
+  * When the owner's scope ends, the memory is free
+* Read only borrow (example: `&String`)
+  * There is an owner (the memory is not yet free)
+  * There is no concurrent mutable borrow
+  * There may be concurrent read-only borrows
+* Mutable borrow (example: &mut String)
+  * There is an owner (the memory is not yet free)
+  * There is no concurrent borrow
 
-</v-clicks>
+---
 
-<v-click>
+## Automatic free
 
-```rust {1,3|2|3|all}
+
+```rust {1,3|2|3}
 fn foo() {
   let s1 = String::from("hello");
 }
 ```
-
-</v-click>
 
 <!--
 Enforced at compile time
@@ -289,7 +308,7 @@ Ownership may be transfered
 
 <v-click>
 
-```rust {1|1-4|6,7,9|6-9|all}
+```rust {1|1-4|7|1,2,3,4,8|9}
 fn foo(s: String) -> String { 
   println!("{s}");
   s
@@ -311,14 +330,16 @@ Ownership can be transfered via:
 
 ---
 
-## Use after free / double free
+## Use after free
 
-```rust {1|4|5|6|all}
-fn drop(s: String) {}
+```rust {1-3|6|7|8}
+fn foo(s: String) {
+  println!("{s}");
+}
 
 fn main() {
   let s = String::new();
-  drop(s);
+  foo(s);
   println!("{s}");
 }
 ```
@@ -337,16 +358,15 @@ fn main() {
 
 ## The Copy trait
 
-```rust
+```rust {1-3|6,7|8|all}
 fn foo(num: i32) {
   println!("{num}");
 }
-```
-```rust
+
 fn main() {
   let num = 42;
   foo(num); // copy
-  foo(num); // copy (no error)
+  foo(num); // copy again (no error)
 }
 ```
 
@@ -354,74 +374,52 @@ fn main() {
 
 ## References
 
-```rust
-fn take_read_only_ref(s: &String) {
-  // The reference is guarandeed to live for at least as long as the scope.
+```rust {1|2-3|4-5|1-6|8|9-10|11-12|8-13}
+fn take_mutable_ref(s: &mut String) {
+  // The reference is guarandeed to live for at least as long as the scope
   println!("{s}");
-  // There may be other scopes with concurrent access. 
+  // This scope has exclusive access to the reference
+  s.push_str("!");
+}
+
+fn take_read_only_ref(s: &String) {
+  // The reference is guarandeed to live for at least as long as the scope
+  println!("{s}");
+  // There may be other scopes with concurrent access
   s.push_str("!"); // <-- Compile error
 }
+```
 
-fn take_mutable_ref(s: &mut String) {
-  // The reference is guarandeed to live for at least as long as the scope.
-  s.push_str("!");
-  // This scope has exclusive access to the reference.
-  println!("{s}");
+---
+
+## Fearless concurrency demo
+
+---
+
+## Null?
+
+```rust
+enum Option<T> {
+  Some(T),
+  None,
 }
 ```
 
-
-## Methods
+<v-click>
 
 ```rust
-impl String {
-  fn add(self, other: &str) -> Self {... }
-  fn len(&self) -> usize { ... }
-  fn push_str(&mut self) { ... }
+let x: Option<i32> = None;
+match x {
+  Some(v) => println!("There is something: {v}"),
+  None => println!("There is nothing"),
 }
 ```
 
----
-
---- 
-
-## Create references
-
-```rust
-let s1 = String::new();
-take_read_only_ref(&s1);
-
-let mut s2 = String::new();
-take_mutable_ref(&mut s2);
-```
-
-```rust
-// is implicit for methods
-let s3 = s1.add(&s2);
-s3.len(); // equivalent to `String::len(&s2)`
-s3.push_str("hello"); // equivalent to `String::push_str(&mut s2)`
-```
+</v-click>
 
 ---
 
-## No concurrent access on mutable data
-
-```rust
-let mut owner = String::new();
-let read_only = &owner; // read-only ref
-owner.push_str("Hello"); // mutable ref
-read_only.len(); // Compile error!
-```
-
-![concurrent borrow errow](/concurrent_borrow_error.png)
-
-<!-- 
-Note the use of `str` instead of `String`
--->
-
----
-
-## Result
+## Error management
 
 ```rust
 enum Result<T, E> {
@@ -430,6 +428,8 @@ enum Result<T, E> {
 }
 ```
 
+<v-click>
+
 ```rust
 struct MyError;
 
@@ -437,6 +437,10 @@ fn may_fail() -> Result<i32, MyError> {
   Err(MyError)
 }
 ```
+
+</v-click>
+
+<v-click>
 
 ```rust
 match may_fail() {
@@ -452,4 +456,33 @@ fn foo() -> Result<String, MyError> {
 }
 ```
 
+</v-click>
+
 ---
+
+## Tooling
+
+* toolchain manager (rustup)
+* package manager (cargo)
+* linter (cargo clippy)
+* code formater (cargo fmt)
+* documentation generator (cargo doc)
+
+---
+
+## Documentation
+
+````rust
+/// Returns the double of the given value
+///
+/// # Examples
+///
+/// ```
+/// let result = double(2);
+/// assert_eq!(result, 4);
+/// ```
+fn double(a: i32) -> i32 {
+  a * 2
+}
+````
+
