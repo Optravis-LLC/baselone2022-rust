@@ -137,7 +137,7 @@ On the stack by default (like value-classes)
 
 ---
 
-## Enums and matching
+## Enums and pattern matching
 
 ```rust {1,8|2|3|4-7|1-8|10-16}
 enum Stuff {
@@ -246,33 +246,39 @@ Generic functions are monomorphised
 
 ## No GC, yet memory safe!
 
+<v-clicks>
+
 * no use after free
 * no double free
 * no dangling pointer
 * no data race
+* hard to create a memory leak
+
+</v-clicks>
 
 ---
 
 ## Memory ownership rules
 
-* Each value has an exactly one owner.
-* When the owner goes out of scope, the value will be dropped.
+<v-clicks>
 
-```rust {1|1,2|3,4|3-5|1,2,6|all}
+* Each value has an exactly one owner
+* At the end of owner's scope, the memory is freed
+
+</v-clicks>
+
+<v-click>
+
+```rust {1,3|2|3|all}
 fn foo() {
-  let s1 = String::from("hello ");
-  { 
-    let s2 = String::from("world!");
-  } // s2 is droped
-} // s1 is droped
+  let s1 = String::from("hello");
+}
 ```
 
+</v-click>
+
 <!--
-* Quick intro to the presented rust syntax
-* Type inference
-* Mention why we I use string for the examples
-* Introduce the concept of "scope"
-* The compiler automatically injects deallocation code.
+Enforced at compile time
 -->
 
 ---
@@ -281,21 +287,22 @@ fn foo() {
 
 Ownership may be transfered
 
-```rust
+<v-click>
+
+```rust {1|1-4|6,7,9|6-9|all}
 fn foo(s: String) -> String { 
-  println!(s);
+  println!("{s}");
   s
+}
+
+fn main() {
+  let s1 = String::from("hello world");
+  let s2 = foo(s1);
 }
 ```
 
-```rust
-fn main() {
-  let s1 = String::from("hello world");
-  // s1 is moved to `foo`
-  // the result of `foo` is moved to s2
-  let s2 = foo(s1);
-} // s2 is droped
-```
+</v-click>
+
 <!--
 Ownership can be transfered via:
 * Function argument
@@ -304,26 +311,27 @@ Ownership can be transfered via:
 
 ---
 
-## Use after free
+## Use after free / double free
 
-```rust
-fn foo(s: String) {
-  println!("{s}");
-} // s is droped
-```
-```rust {monaco}
+```rust {1|4|5|6|all}
+fn drop(s: String) {}
+
 fn main() {
   let s = String::new();
-  foo(s); // transfer ownership to `foo`
-  foo(s); // compile error! (use after free)
+  drop(s);
+  println!("{s}");
 }
 ```
+
+<v-click>
+
+![move error](/move_error.png)
+
+</v-click>
 
 <!--
 "double free" is also prevented the same way, as it is a special case of "use after free"
 -->
-
-![move error](/move_error.png)
 
 ---
 
