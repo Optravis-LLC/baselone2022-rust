@@ -19,11 +19,50 @@ highlighter: shiki
 > 
 > Senior software developer at Optravis
 
+<v-clicks>
+
 * Mainly Java from 2010 to 2016
 * Mainly Kotlin since 2016
-* Rust for hobby projects since 2022
+* Rust for hobby projects since 2020
   * benimator: A sprite animation library
   * beancount-parser: A parser for beancount files
+
+</v-clicks>
+
+---
+
+## Agenda
+
+* Intro to the language
+* Memory ownership system
+* Error management
+
+<!-- TODO Iterators -->
+<!-- TODO Macros -->
+<!-- TODO Ecosystem -->
+
+---
+
+## Rust
+
+> A language empowering *everyone* to build *reliable* and *efficient* software.
+
+<v-clicks>
+
+* safe
+* fast
+* productive
+
+</v-clicks>
+
+<!--
+* Borrow checker
+* Compiled to machine code
+* No runtime
+* No garbage collector
+
+**The tradeoff: complexity**
+-->
 
 ---
 
@@ -33,10 +72,13 @@ highlighter: shiki
 fn main() {
   println!("Hello world!");
 }
-
 ```
 
-```rust
+---
+
+## Functions
+
+```rust {1,3|1-3|5,6,8|all}
 fn foo(a: i32, b: i32) -> i32 {
   a + b
 }
@@ -112,20 +154,6 @@ fn main() {
 
 ---
 
-## Rust
-
-> A *language* empowering everyone to build *reliable* and *efficient* software.
-
-* safe
-* fast
-* productive
-
-<!--
-* Compiled to machine code
-* No runtime
-* No garbage collector
-* Borrow checker
--->
 
 ## No GC, yet memory safe!
 
