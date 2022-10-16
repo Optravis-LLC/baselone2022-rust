@@ -24,10 +24,18 @@ highlighter: shiki
 * Mainly Java from 2010 to 2016
 * Mainly Kotlin since 2016
 * Rust for hobby projects since 2020
-  * benimator: A sprite animation library
-  * beancount-parser: A parser for beancount files
+  * benimator: Sprite animation
+  * bhv-arena: Bounding-volume hierarchy for collision detection
+  * impacted: 2d collision detection logic
+  * beancount-parser: Parser for beancount files
 
 </v-clicks>
+
+<!--
+## Optravis
+* Build software for software operational transfer pricing
+* We have booth
+-->
 
 ---
 
@@ -45,13 +53,22 @@ highlighter: shiki
 
 ## Rust
 
-> A language empowering *everyone* to build *reliable* and *efficient* software.
+> A language empowering **everyone** to build **reliable** and **efficient** software.
 
 <v-clicks>
 
-* safe
-* fast
-* productive
+* Safe
+  * Strong type system
+  * Memory safe
+  * Data-race free
+* Fast
+  * Compiled to machine code
+  * No runtime
+  * No garbage collector
+* Productive
+  * Type inference
+  * High level abstraction
+  * Excellent toolings
 
 </v-clicks>
 
