@@ -86,6 +86,10 @@ fn main() {
 }
 ```
 
+<!-- 
+Println! is a macro
+-->
+
 ---
 
 ## Functions
@@ -107,6 +111,11 @@ println!("{x}");
 
 </v-click>
 
+<!--
+The macro check at compile time that the string can be interpolated 
+Interpolation is a feature of the macro, not of the language
+-->
+
 ---
 
 ## Structs
@@ -117,7 +126,7 @@ struct Vector {
   y: i32,
 }
 
-struct UnamedFields(i32,i32);
+struct WithUnamedFields(i32,i32);
 
 struct WithoutField;
 ```
@@ -130,7 +139,7 @@ On the stack by default (like value-classes)
 
 ## Enums and matching
 
-```rust
+```rust {1,8|2|3|4-7|1-8|10-16}
 enum Stuff {
   Unit,
   WithData(f32),
@@ -143,17 +152,24 @@ enum Stuff {
 fn foo(s: Stuff) -> String {
   match s {
     Stuff::Unit => String::from("unit"),
+    Stuff::WithData(0) => String::from("zero"),
     Stuff::WithData(v) => v.to_string(),
     Stuff::WithStructuredData { x, y } => format!("({x}, {y})"),
   }
 }
 ```
 
+<!--
+Enums can have data.
+Like sealed classes.
+Pattern matching!
+-->
+
 ---
 
 ## Methods
 
-```rust
+```rust {1-4|6,14|7-9|11-13}
 struct Vector {
   x: i32,
   y: i32,
@@ -168,16 +184,65 @@ impl Vector {
     self.x * other.x + self.y * other.y
   }
 }
+```
 
-fn main() {
-  let v1 = Vector::new(1, 2);
-  let v2 = Vector::new(3, 4);
-  let dot = v1.dot(v2);
+<v-click>
+
+```rust
+let v1 = Vector::new(1, 2);
+let v2 = Vector::new(3, 4);
+let dot = v1.dot(v2);
+```
+
+</v-click>
+
+---
+
+## Traits
+
+```rust {1,4|2-3|6,13|7-12|all}
+trait Len {
+  fn new_empty() -> Self;
+  fn len(&self) -> usize;
+}
+
+impl Len for String {
+  fn new_empty() -> Self {
+    String::new()
+  }
+  fn len(&self) -> usize {
+    self.len()
+  }
 }
 ```
 
 ---
 
+## Generics
+
+```rust
+fn greet<T : Display>(name: T) {
+  println!("Hello {value}!");
+}
+```
+
+<v-click>
+
+### Monomorphisation
+
+```rust {1|2|3|all}
+greet(String::from("hello")); // greet_String(name: String)
+greet(3);                     // greet_i32(name: i32)
+greet(true);                  // greet_bool(name: bool)
+```
+
+</v-click>
+
+<!--
+Generic functions are monomorphised
+-->
+
+---
 
 ## No GC, yet memory safe!
 
