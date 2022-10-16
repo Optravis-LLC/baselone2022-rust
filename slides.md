@@ -73,11 +73,6 @@ highlighter: shiki
 </v-clicks>
 
 <!--
-* Borrow checker
-* Compiled to machine code
-* No runtime
-* No garbage collector
-
 **The tradeoff: complexity**
 -->
 
@@ -95,29 +90,41 @@ fn main() {
 
 ## Functions
 
-```rust {1,3|1-3|5,6,8|all}
+### Declare
+```rust {1,3|all}
 fn foo(a: i32, b: i32) -> i32 {
   a + b
 }
-
-fn main() {
-  let x = foo(1, 2);
-  println!("{x}");
-}
 ```
+
+<v-click>
+
+### Use
+```rust {1|all}
+let x = foo(1, 2);
+println!("{x}");
+```
+
+</v-click>
 
 ---
 
 ## Structs
 
-```rust
+```rust {1-4|6|8|all}
 struct Vector {
   x: i32,
   y: i32,
 }
 
-struct Unit;
+struct UnamedFields(i32,i32);
+
+struct WithoutField;
 ```
+
+<!--
+On the stack by default (like value-classes)
+-->
 
 ---
 
