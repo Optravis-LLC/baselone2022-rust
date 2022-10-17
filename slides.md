@@ -477,11 +477,27 @@ fn foo() -> Result<String, MyError> {
 
 ## Tooling
 
+<v-clicks>
+
 * toolchain manager (rustup)
 * package manager (cargo)
 * linter (cargo clippy)
 * code formater (cargo fmt)
 * documentation generator (cargo doc)
+* Well supported by your favorite IDE
+  * IntelliJ, CLion
+  * VSCode
+  * Any LSP compatible editor (vim, nvim, helix, etc.)
+  
+</v-clicks>
+
+---
+
+## Dependency management
+
+```mermaid
+
+```
 
 ---
 
@@ -501,3 +517,23 @@ fn double(a: i32) -> i32 {
 }
 ````
 
+<!-- 
+Show docs.rs
+-->
+
+---
+
+## Wrap up
+
+<v-clicks>
+
+* Fast and reliable
+* Modern syntax (but hard to learn)
+* Excellent tooling
+* High-quality ecosystem
+
+</v-clicks>
+
+---
+
+## Questions
