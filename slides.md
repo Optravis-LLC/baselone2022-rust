@@ -71,7 +71,7 @@ highlighter: shiki
 </v-clicks>
 
 <!--
-**The tradeoff: complexity**
+**The tradeoff: Complexity and hard to learn**
 -->
 
 ---
@@ -206,6 +206,12 @@ impl Len for String {
 }
 ```
 
+<!--
+* Can define 'static' method available on type
+* Can refer to the implementation type via `Self`.
+* Can be implemented on third party types!
+-->
+
 ---
 
 ## Generics
@@ -229,7 +235,9 @@ greet(true);                  // greet_bool(name: bool)
 </v-click>
 
 <!--
-Generic functions are monomorphised
+* static dispatch
+* no auto-boxing
+* each variant can be optimized independently
 -->
 
 ---
@@ -256,35 +264,20 @@ Lazily evaluated (the examle is only one iteration)
 
 ## Macros
 
-<v-clicks>
+```rust {2-3|6-7}
+fn main() {
+  let name = "BaselOne";
+  println!("Hello {name}");
+}
 
-* There is no reflection support
-* Macros can read and generate code at compile time
-
-</v-clicks>
-
-<v-click>
-
-```rust
 #[derive(Serialize, Deserialize)]
 struct Person { name: String }
 ```
 
-</v-click>
-
----
-
-## No GC, yet memory safe!
-
-<v-clicks>
-
-* no use after free
-* no double free
-* no dangling pointer
-* no data race
-* hard to create a memory leak
-
-</v-clicks>
+<!--
+* No support for reflection 
+* Macros can read and generate code at compile time
+-->
 
 ---
 
@@ -302,10 +295,17 @@ struct Person { name: String }
   * There is an owner (the memory is not yet free)
   * There is no concurrent borrow
 
+<!--
+* no use after free
+* no double free
+* no dangling pointer
+* no data race
+* hard to create a memory leak
+-->
+
 ---
 
 ## Automatic free
-
 
 ```rust {1,3|2|3}
 fn foo() {
@@ -386,6 +386,11 @@ fn main() {
   foo(num); // copy again (no error)
 }
 ```
+
+<!--
+If the type can be cheaply copied (on the stack)
+It is implicitely copied instead of being moved
+-->
 
 ---
 
@@ -471,7 +476,6 @@ enum Result<T, E> {
   Err(E),
 }
 ```
-
 
 <v-click>
 
