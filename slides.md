@@ -89,32 +89,6 @@ Println! is a macro
 
 ---
 
-## Functions
-
-### Declare
-```rust {1,3|all}
-fn foo(a: i32, b: i32) -> i32 {
-  a + b
-}
-```
-
-<v-click>
-
-### Use
-```rust {1|all}
-let x = foo(1, 2);
-println!("{x}");
-```
-
-</v-click>
-
-<!--
-The macro check at compile time that the string can be interpolated 
-Interpolation is a feature of the macro, not of the language
--->
-
----
-
 ## Structs
 
 ```rust {1-4|6|8|all}
@@ -130,6 +104,10 @@ struct WithoutField;
 
 <!--
 On the stack by default (like value-classes)
+
+Zero cost abstraction
+
+No inheritance
 -->
 
 ---
@@ -164,6 +142,14 @@ Pattern matching!
 
 ---
 
+## Other types
+
+* tuples (example: `(i32, String)`)
+* type alias (example: `type Foo = Bar<i32>`)
+* arrays (exmaple: [0; i32])
+
+---
+
 ## Methods
 
 ```rust {1-4|6,14|7-9|11-13}
@@ -192,6 +178,8 @@ let dot = v1.dot(v2);
 ```
 
 </v-click>
+
+<!-- Static dispatch -->
 
 ---
 
@@ -254,6 +242,8 @@ fn main() {
     })
 }  
 ```
+
+---
 
 ---
 
