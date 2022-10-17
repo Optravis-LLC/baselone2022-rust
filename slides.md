@@ -145,9 +145,13 @@ Pattern matching!
 
 ## Other types
 
+<v-clicks>
+
 * tuples (example: `(i32, String)`)
 * type alias (example: `type Foo = Bar<i32>`)
 * arrays (exmaple: [0; i32])
+
+</v-clicks>
 
 ---
 
@@ -245,6 +249,24 @@ fn main() {
 ```
 
 ---
+
+## Macros
+
+<v-clicks>
+
+* There is no reflection support
+* Macros can read and generate code at compile time
+
+</v-clicks>
+
+<v-click>
+
+```rust
+#[derive(Serialize, Deserialize)]
+struct Person { name: String }
+```
+
+</v-click>
 
 ---
 
@@ -419,6 +441,10 @@ Two kind of errors:
 * Recoverable: (no network, file not found, invalid input, etc.)
 * Unrecoverable: (out-of-memory, bug)
 
+</v-clicks>
+
+---
+
 ## Panic for unrecoverable
 
 ```rust
@@ -431,9 +457,9 @@ A panic, is an immediate crash of the software with a stack trace
 It cannot be recovered
 -->
 
-## Result type
+---
 
-</v-clicks>
+## Result type
 
 ```rust
 enum Result<T, E> {
@@ -484,10 +510,9 @@ fn foo() -> Result<String, MyError> {
 * linter (cargo clippy)
 * code formater (cargo fmt)
 * documentation generator (cargo doc)
-* Well supported by your favorite IDE
+* your favorite IDE
   * IntelliJ, CLion
-  * VSCode
-  * Any LSP compatible editor (vim, nvim, helix, etc.)
+  * Any LSP compatible editor (VSCode, vim, neovim, etc.)
   
 </v-clicks>
 
@@ -495,9 +520,16 @@ fn foo() -> Result<String, MyError> {
 
 ## Dependency management
 
-```mermaid
+cargo understands semver
 
+```mermaid
+flowchart
+  A --> B
+  A -v1.2.0-> C
+  B -v1.0.0-> C
+  C
 ```
+
 
 ---
 
