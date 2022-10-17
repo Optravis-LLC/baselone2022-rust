@@ -43,6 +43,7 @@ highlighter: shiki
 
 * Tour of the language syntax
 * Memory ownership system
+* Fearless concurrency demo
 * Error management
 * The Ecosystem and tools
 
@@ -411,12 +412,36 @@ match x {
 
 ## Error management
 
+Two kind of errors:
+
+<v-clicks>
+
+* Recoverable: (no network, file not found, invalid input, etc.)
+* Unrecoverable: (out-of-memory, bug)
+
+## Panic for unrecoverable
+
+```rust
+let array = [0, 1, 2];
+let value = array[5]; // Panic!
+```
+
+<!--
+A panic, is an immediate crash of the software with a stack trace
+It cannot be recovered
+-->
+
+## Result type
+
+</v-clicks>
+
 ```rust
 enum Result<T, E> {
   Ok(T),
   Err(E),
 }
 ```
+
 
 <v-click>
 
