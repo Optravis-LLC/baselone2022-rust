@@ -523,11 +523,11 @@ fn foo() -> Result<String, MyError> {
 cargo understands semver
 
 ```mermaid
-flowchart
+flowchart LR
   A --> B
-  A -v1.2.0-> C
-  B -v1.0.0-> C
-  C
+  A -- v1.2.0 ---> C
+  B -- v1.0.0 ---> C
+  C[v1.2.1]
 ```
 
 
