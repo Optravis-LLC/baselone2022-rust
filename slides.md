@@ -34,7 +34,7 @@ highlighter: shiki
 <!--
 ## Optravis
 * Build software for software operational transfer pricing
-* We have booth
+* We have a booth
 -->
 
 ---
@@ -55,14 +55,14 @@ highlighter: shiki
 
 <v-clicks>
 
-* Safe
-  * Strong type system
-  * Memory safe
-  * Data-race free
 * Fast
   * Compiled to machine code
   * No runtime
   * No garbage collector
+* Safe
+  * Strong type system
+  * Memory safe
+  * Data-race free
 * Productive
   * Type inference
   * High level abstraction
@@ -90,86 +90,47 @@ Println! is a macro
 
 ---
 
-## Structs
+## Structs and enums
 
-```rust {1-4|6|8|all}
+```rust {1-4|6-9|all}
 struct Vector {
   x: i32,
   y: i32,
 }
 
-struct WithUnamedFields(i32,i32);
-
-struct WithoutField;
-```
-
-<!--
-On the stack by default (like value-classes)
-
-Zero cost abstraction
-
-No inheritance
--->
-
----
-
-## Enums and pattern matching
-
-```rust {1,8|2|3|4-7|1-8|10-16}
-enum Stuff {
-  Unit,
-  WithData(f32),
-  WithStructuredData {
-    x: i32,
-    y: i32,
-  }
+enum State {
+  Idle,
+  Moving { speed: Vector },
 }
 
-fn foo(s: Stuff) -> String {
-  match s {
-    Stuff::Unit => String::from("unit"),
-    Stuff::WithData(0) => String::from("zero"),
-    Stuff::WithData(v) => v.to_string(),
-    Stuff::WithStructuredData { x, y } => format!("({x}, {y})"),
-  }
+struct Person {
+  location: Vector,
+  state: State,
 }
 ```
 
 <!--
-Enums can have data.
-Like sealed classes.
-Pattern matching!
+* Zero cost abstraction
+* enums are like sealed classes in Java
 -->
-
----
-
-## Other types
-
-<v-clicks>
-
-* tuples (example: `(i32, String)`)
-* type alias (example: `type Foo = Bar<i32>`)
-* arrays (exmaple: [0; i32])
-
-</v-clicks>
 
 ---
 
 ## Methods
 
-```rust {1-4|6,14|7-9|11-13}
+```rust {1-4|6,14|7-9|11-13|all}
 struct Vector {
   x: i32,
   y: i32,
 }
 
 impl Vector {
-  fn new(x: i32, y: i32) -> Self {
-    Self { x, y }
-  }
-  
-  fn dot(self, other: Self) -> i32 {
+  fn dot(self, other: Vector) -> i32 {
     self.x * other.x + self.y * other.y
+  }
+
+  fn new(x: i32, y: i32) -> Vector {
+    Vector { x, y }
   }
 }
 ```
@@ -184,13 +145,15 @@ let dot = v1.dot(v2);
 
 </v-click>
 
-<!-- Static dispatch -->
+<!--
+* static dispatch
+-->
 
 ---
 
 ## Traits
 
-```rust {1,4|2-3|6,13|7-12|all}
+```rust {1-4|6-13|all}
 trait Len {
   fn new_empty() -> Self;
   fn len(&self) -> usize;
@@ -218,13 +181,12 @@ impl Len for String {
 
 ```rust
 fn greet<T : Display>(name: T) {
-  println!("Hello {value}!");
+  let name_string = name.to_string();
+  println!("Hello {name_string}!");
 }
 ```
 
 <v-click>
-
-### Monomorphisation
 
 ```rust {1|2|3|all}
 greet(String::from("hello")); // greet_String(name: String)
@@ -256,23 +218,27 @@ fn main() {
 }
 ```
 
-<!-- 
-Lazily evaluated (the examle is only one iteration)
+<!--
+Zero cost abstractions
 -->
 
 ---
 
 ## Macros
 
-```rust {2-3|6-7}
+<v-click>
+
+```rust {1-2|4-7|all}
+#[derive(Serialize, Deserialize)]
+struct Person { name: String }
+
 fn main() {
   let name = "BaselOne";
   println!("Hello {name}");
 }
-
-#[derive(Serialize, Deserialize)]
-struct Person { name: String }
 ```
+
+</v-click>
 
 <!--
 * No support for reflection 
@@ -283,6 +249,7 @@ struct Person { name: String }
 
 ## Memory ownership model
 
+<v-clicks>
 
 * Ownership (example: `String`)
   * Each value as exactly one owner
@@ -291,9 +258,11 @@ struct Person { name: String }
   * There is an owner (the memory is not yet free)
   * There is no concurrent mutable borrow
   * There may be concurrent read-only borrows
-* Mutable borrow (example: &mut String)
+* Mutable borrow (example: `&mut String`)
   * There is an owner (the memory is not yet free)
   * There is no concurrent borrow
+
+</v-clicks>
 
 <!--
 * no use after free
@@ -349,14 +318,12 @@ Ownership can be transfered via:
 
 ## Use after free
 
-```rust {1-3|6|7|8}
-fn foo(s: String) {
-  println!("{s}");
-}
+```rust {1|4|5|6|all}
+fn drop<T>(s: T) {}
 
 fn main() {
   let s = String::new();
-  foo(s);
+  drop(s);
   println!("{s}");
 }
 ```
@@ -373,30 +340,9 @@ fn main() {
 
 ---
 
-## The Copy trait
-
-```rust {1-3|6,7|8|all}
-fn foo(num: i32) {
-  println!("{num}");
-}
-
-fn main() {
-  let num = 42;
-  foo(num); // copy
-  foo(num); // copy again (no error)
-}
-```
-
-<!--
-If the type can be cheaply copied (on the stack)
-It is implicitely copied instead of being moved
--->
-
----
-
 ## References
 
-```rust {1|2-3|4-5|1-6|8|9-10|11-12|8-13}
+```rust {1-6|8-13|all}
 fn take_mutable_ref(s: &mut String) {
   // The reference is guarandeed to live for at least as long as the scope
   println!("{s}");
@@ -418,7 +364,9 @@ fn take_read_only_ref(s: &String) {
 
 ---
 
-## Null?
+## The billion dollar mistake
+
+<v-click>
 
 ```rust
 enum Option<T> {
@@ -426,6 +374,8 @@ enum Option<T> {
   None,
 }
 ```
+
+</v-click>
 
 <v-click>
 
@@ -438,6 +388,11 @@ match x {
 ```
 
 </v-click>
+
+<!--
+- Tony Hoare
+
+-->
 
 ---
 
