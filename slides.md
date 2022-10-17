@@ -234,19 +234,23 @@ Generic functions are monomorphised
 
 ---
 
-## iterators
+## Iterators
 
 ```rust
 fn main() {
   (0..100)
     .filter(|n| *n % 2 == 0)
     .map(|n| n + 1)
-    .map(i32::to_string)
+    .map(|i| i.to_string())
     .for_each(|v| {
-      println!("{v}");
+        println!("{v}");
     })
-}  
+}
 ```
+
+<!-- 
+Lazily evaluated (the examle is only one iteration)
+-->
 
 ---
 
@@ -445,7 +449,7 @@ Two kind of errors:
 
 ---
 
-## Panic for unrecoverable
+## Panic
 
 ```rust
 let array = [0, 1, 2];
@@ -459,7 +463,7 @@ It cannot be recovered
 
 ---
 
-## Result type
+## Result
 
 ```rust
 enum Result<T, E> {
@@ -520,16 +524,58 @@ fn foo() -> Result<String, MyError> {
 
 ## Dependency management
 
-cargo understands semver
+```mermaid
+flowchart LR
+  X[My App]
+  X --> A
+  X --> B
+  A -- v1.2.0 ---> C
+  B -- v1.0.0 ---> C
+  C[C ?]
+```
+
+---
+
+## Dependency management
 
 ```mermaid
 flowchart LR
-  A --> B
+  X[My App]
+  X --> A
+  X --> B
   A -- v1.2.0 ---> C
   B -- v1.0.0 ---> C
-  C[v1.2.1]
+  C[C v1.2.3]
 ```
 
+---
+
+## Dependency management
+
+```mermaid
+flowchart LR
+  X[My App]
+  X --> A
+  X --> B
+  A -- v1.2.0 ---> C
+  B -- v2.0.0 ---> C
+  C[C ?]
+```
+
+---
+
+## Dependency management
+
+```mermaid
+flowchart LR
+  X[My App]
+  X --> A
+  X --> B
+  A -- v1.2.0 ---> C1
+  B -- v2.0.0 ---> C2
+  C1[C v1.2.1]
+  C2[C v2.0.0]
+```
 
 ---
 
