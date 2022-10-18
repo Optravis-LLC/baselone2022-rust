@@ -454,12 +454,12 @@ fn foo() -> Result<String, MyError> {
 
 <v-clicks>
 
-* toolchain manager (rustup)
-* package manager (cargo)
-* linter (cargo clippy)
-* code formater (cargo fmt)
-* documentation generator (cargo doc)
-* your favorite IDE
+* Toolchain manager (rustup)
+* Package manager (cargo)
+* Linter (cargo clippy)
+* Code formater (cargo fmt)
+* Documentation generator (cargo doc)
+* Your favorite IDE
   * IntelliJ, CLion
   * Any LSP compatible editor (VSCode, vim, neovim, etc.)
   
