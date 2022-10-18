@@ -1,5 +1,7 @@
 ---
 theme: seriph
+themeConfig:
+  primary: '#5d8392'
 canvasWidth: 800
 background: https://source.unsplash.com/1600x900/?rust
 class: 'text-center'
@@ -33,7 +35,7 @@ Rust for hobby projects since 2020
 
 ---
 
-## Rust
+## <logos-rust/>
 
 > A language empowering **everyone** to build **reliable** and **efficient** software.
 
