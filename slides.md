@@ -1,5 +1,6 @@
 ---
 theme: seriph
+canvasWidth: 800
 background: https://source.unsplash.com/1600x900/?rust
 class: 'text-center'
 highlighter: shiki
@@ -14,13 +15,13 @@ highlighter: shiki
 > 
 > Senior software developer at Optravis
 
-<p><logos-github-icon/> jcornaz </p>
-
 ![Optravis](optravis_logo.jpg)
 
 <v-clicks>
 
 Rust for hobby projects since 2020
+
+<p><logos-github-icon/> jcornaz </p>
 
 </v-clicks>
 
@@ -38,23 +39,22 @@ Rust for hobby projects since 2020
 
 <v-clicks>
 
-* Fast
+* Performance
   * Compiled to machine code
-  * No runtime
   * No garbage collector
-* Safe
+* Reliability
   * Strong type system
   * Memory safe
-  * Data-race free
-* Productive
+* Productivity
   * Type inference
-  * High level abstraction
-  * Excellent toolings
+  * Excellent tooling
 
 </v-clicks>
 
 <!--
-**But complex and hard to learn**
+* No runtime/virtual machine
+* High level abstractions
+* But complex and hard to learn
 -->
 
 ---
@@ -241,7 +241,6 @@ fn main() {
   * When the owner's scope ends, the memory is free
 * Read only borrow (example: `&String`)
   * There is an owner (the memory is not yet free)
-  * There is no concurrent mutable borrow
   * There may be concurrent read-only borrows
 * Mutable borrow (example: `&mut String`)
   * There is an owner (the memory is not yet free)
