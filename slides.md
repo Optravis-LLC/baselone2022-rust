@@ -39,16 +39,6 @@ highlighter: shiki
 
 ---
 
-## Agenda
-
-* Tour of the language syntax
-* Memory ownership system
-* Fearless concurrency demo
-* Error management
-* The Ecosystem and tools
-
----
-
 ## Rust
 
 > A language empowering **everyone** to build **reliable** and **efficient** software.
@@ -481,6 +471,23 @@ fn foo() -> Result<String, MyError> {
 
 ---
 
+## Wrap up
+
+<v-clicks>
+
+* Fast and reliable
+* Modern syntax (but hard to learn)
+* Excellent tooling
+* High-quality ecosystem
+
+</v-clicks>
+
+---
+
+## Questions
+
+---
+
 ## Dependency management
 
 ```mermaid
@@ -536,41 +543,3 @@ flowchart LR
   C2[C v2.0.0]
 ```
 
----
-
-## Documentation
-
-````rust
-/// Returns the double of the given value
-///
-/// # Examples
-///
-/// ```
-/// let result = double(2);
-/// assert_eq!(result, 4);
-/// ```
-fn double(a: i32) -> i32 {
-  a * 2
-}
-````
-
-<!-- 
-Show docs.rs
--->
-
----
-
-## Wrap up
-
-<v-clicks>
-
-* Fast and reliable
-* Modern syntax (but hard to learn)
-* Excellent tooling
-* High-quality ecosystem
-
-</v-clicks>
-
----
-
-## Questions
