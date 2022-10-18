@@ -17,7 +17,7 @@ highlighter: shiki
 > 
 > Senior software developer at Optravis
 
-![Optravis](optravis_logo.jpg)
+![Optravis](/optravis_logo.jpg)
 
 <v-clicks>
 
