@@ -19,6 +19,8 @@ highlighter: shiki
 > 
 > Senior software developer at Optravis
 
+![Optravis](optravis_logo.png)
+
 <v-clicks>
 
 * Mainly Java from 2010 to 2016
@@ -33,8 +35,8 @@ highlighter: shiki
 
 <!--
 ## Optravis
-* Build software for software operational transfer pricing
 * We have a booth
+* Quiz!
 -->
 
 ---
@@ -61,7 +63,7 @@ highlighter: shiki
 </v-clicks>
 
 <!--
-**The tradeoff: Complexity and hard to learn**
+**But complex and hard to learn**
 -->
 
 ---
@@ -90,7 +92,7 @@ struct Vector {
 
 enum State {
   Idle,
-  Moving { speed: Vector },
+  Moving { velocity: Vector },
 }
 
 struct Person {
@@ -190,6 +192,7 @@ greet(true);                  // greet_bool(name: bool)
 * static dispatch
 * no auto-boxing
 * each variant can be optimized independently
+* bloat, and `dyn` keyword
 -->
 
 ---
@@ -209,7 +212,8 @@ fn main() {
 ```
 
 <!--
-Zero cost abstractions
+* zero cost abstractions
+* readable idiomatic code is fast
 -->
 
 ---
