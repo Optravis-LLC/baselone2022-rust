@@ -452,9 +452,14 @@ fn foo() -> Result<String, MyError> {
 
 ---
 
+
 ## Tooling
 
-<!-- TODO ![Cargo logo](/cargo-logo.svg) -->
+![Cargo logo](/cargo-logo.png)
+
+---
+
+## Tooling
 
 <v-clicks>
 
