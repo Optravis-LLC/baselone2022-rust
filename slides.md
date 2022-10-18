@@ -11,6 +11,8 @@ highlighter: shiki
 # Build trust with rust
 
 ---
+layout: center
+---
 
 
 > **Jonathan Cornaz**
@@ -343,6 +345,8 @@ fn take_read_only_ref(s: &String) {
 ```
 
 ---
+layout: center
+---
 
 ## Fearless concurrency demo
 
@@ -451,9 +455,8 @@ fn foo() -> Result<String, MyError> {
 </v-click>
 
 ---
-
-
-## Tooling
+layout: center
+---
 
 ![Cargo logo](/cargo-logo.png)
 
@@ -495,8 +498,29 @@ fn foo() -> Result<String, MyError> {
 -->
 
 ---
+layout: center
+---
+
+<img src="/learn-url.png" class="w-50 h-50" />
+
+* [rust-lang.org/learn](https://www.rust-lang.org/learn)
+  * The rust book
+  * Rustlings
+
+<!-- Learn -->
+
+---
+layout: center
+---
 
 ## Questions
+
+---
+layout: center
+---
+
+## Thank you
+
 
 ---
 
