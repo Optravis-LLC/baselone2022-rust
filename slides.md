@@ -454,16 +454,18 @@ fn foo() -> Result<String, MyError> {
 
 ## Tooling
 
+<!-- TODO ![Cargo logo](/cargo-logo.svg) -->
+
 <v-clicks>
 
-* Toolchain manager (rustup)
-* Package manager (cargo)
-* Linter (cargo clippy)
-* Code formater (cargo fmt)
-* Documentation generator (cargo doc)
+* Toolchain manager (`rustup`)
+* Package manager (`cargo`)
+* Linter (`cargo clippy`)
+* Code formater (`cargo fmt`)
+* Documentation generator (`cargo doc`)
 * Your favorite IDE
   * IntelliJ, CLion
-  * Any LSP compatible editor (VSCode, vim, neovim, etc.)
+  * Any LSP compatible editor (VSCode, vim, helix, etc.)
   
 </v-clicks>
 
