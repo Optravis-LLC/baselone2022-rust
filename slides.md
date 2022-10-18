@@ -467,16 +467,23 @@ fn foo() -> Result<String, MyError> {
 
 ---
 
-## Wrap up
+## A good fit for:
 
 <v-clicks>
 
-* Fast and reliable
-* Modern syntax (but hard to learn)
-* Excellent tooling
-* High-quality ecosystem
+* Performance critical workloads
+* CLI applications
+* Backend services
+* System programing
+* Game developement
 
 </v-clicks>
+
+<!--
+* Fast
+* Reliable
+* Excellent tooling
+-->
 
 ---
 
