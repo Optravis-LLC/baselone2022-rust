@@ -56,6 +56,7 @@ Rust for hobby projects since 2020
 </v-clicks>
 
 <!--
+* Pick two
 * No runtime/virtual machine
 * High level abstractions
 * But complex and hard to learn
@@ -97,8 +98,8 @@ struct Person {
 ```
 
 <!--
-* Zero cost abstraction
 * enums are like sealed classes in kotlin
+* Zero cost abstraction
 -->
 
 ---
@@ -133,6 +134,7 @@ let dot = v1.dot(v2);
 </v-click>
 
 <!--
+* no inheritance
 * static dispatch
 -->
 
@@ -578,4 +580,3 @@ flowchart LR
   C1[C v1.2.1]
   C2[C v2.0.0]
 ```
-
