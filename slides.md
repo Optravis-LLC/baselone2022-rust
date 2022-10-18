@@ -13,23 +13,15 @@ highlighter: shiki
 
 ---
 
-## About me
-
 > **Jonathan Cornaz**
 > 
 > Senior software developer at Optravis
 
-![Optravis](optravis_logo.png)
+![Optravis](optravis_logo.jpg)
 
 <v-clicks>
 
-* Mainly Java from 2010 to 2016
-* Mainly Kotlin since 2016
-* Rust for hobby projects since 2020
-  * benimator: Sprite animation
-  * bhv-arena: Bounding-volume hierarchy for collision detection
-  * impacted: 2d collision detection logic
-  * beancount-parser: Parser for beancount files
+Rust for hobby projects since 2020
 
 </v-clicks>
 
@@ -103,7 +95,7 @@ struct Person {
 
 <!--
 * Zero cost abstraction
-* enums are like sealed classes in Java
+* enums are like sealed classes in kotlin
 -->
 
 ---
@@ -384,20 +376,18 @@ match x {
 </v-click>
 
 <!--
-- Tony Hoare
+- Quote by Tony Hoare
 
 -->
 
 ---
 
-## Error management
-
-Two kind of errors:
+## Errors
 
 <v-clicks>
 
-* Recoverable: (no network, file not found, invalid input, etc.)
-* Unrecoverable: (out-of-memory, bug)
+* Unrecoverable *panic*
+* Recoverable *error*
 
 </v-clicks>
 
@@ -407,7 +397,8 @@ Two kind of errors:
 
 ```rust
 let array = [0, 1, 2];
-let value = array[5]; // Panic!
+let option: Option<&i32> = array.get(5); // None
+let value: &i32 = array[5]; // Panic!
 ```
 
 <!--
