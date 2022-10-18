@@ -1,21 +1,20 @@
 ---
-theme: default
+theme: seriph
 background: https://source.unsplash.com/1600x900/?rust
 class: 'text-center'
 highlighter: shiki
 ---
 
-<style>
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-</style>
-
 # Build trust with rust
 
 ---
 
+
 > **Jonathan Cornaz**
 > 
 > Senior software developer at Optravis
+
+<p><logos-github-icon/> jcornaz </p>
 
 ![Optravis](optravis_logo.jpg)
 
@@ -276,8 +275,6 @@ Enforced at compile time
 
 ## Move semantic
 
-Ownership may be transfered
-
 <v-click>
 
 ```rust {1|1-4|7|1,2,3,4,8|9}
@@ -350,7 +347,7 @@ fn take_read_only_ref(s: &String) {
 
 ---
 
-## The billion dollar mistake
+## The billion dollar mistake?
 
 <v-click>
 
@@ -419,7 +416,7 @@ enum Result<T, E> {
 
 <v-click>
 
-```rust
+```rust {1|3-5}
 struct MyError;
 
 fn may_fail() -> Result<i32, MyError> {
@@ -429,14 +426,19 @@ fn may_fail() -> Result<i32, MyError> {
 
 </v-click>
 
-<v-click>
+---
+
+## Result
 
 ```rust
-match may_fail() {
+let result = may_fail()
+match result {
   Ok(v) => println!("The value is: {v}"),
-  Err(err) => println!("Error! {err}"),
+  Err(err) => println!("Oops, there was an error: {err}"),
 }
 ```
+
+<v-click>
 
 ```rust
 fn foo() -> Result<String, MyError> {
