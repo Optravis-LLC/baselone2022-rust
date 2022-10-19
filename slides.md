@@ -3,9 +3,18 @@ theme: seriph
 themeConfig:
   primary: '#5d8392'
 canvasWidth: 800
-background: https://source.unsplash.com/1600x900/?rust
 class: 'text-center'
 highlighter: shiki
+layout: cover
+background: ./sponsors.png
+---
+
+
+<!-- -->
+
+---
+background: https://source.unsplash.com/1600x900/?rust
+layout: cover
 ---
 
 # Build trust with rust
@@ -55,7 +64,10 @@ Rust for hobby projects since 2020
 
 </v-clicks>
 
+
 <!--
+TIME: 45m
+
 * Pick two
 * No runtime/virtual machine
 * High level abstractions
@@ -232,6 +244,7 @@ fn main() {
 </v-click>
 
 <!--
+TIME: 25m
 * No support for reflection 
 * Macros can read and generate code at compile time
 -->
@@ -346,11 +359,21 @@ fn take_read_only_ref(s: &String) {
 }
 ```
 
+<!--
+
+TIME: 15m
+
+-->
+
 ---
 layout: center
 ---
 
 ## Fearless concurrency demo
+
+<!--
+TIME: 10m
+-->
 
 ---
 
@@ -433,6 +456,10 @@ fn may_fail() -> Result<i32, MyError> {
 
 </v-click>
 
+<!--
+We have to handle the error
+-->
+
 ---
 
 ## Result
@@ -455,6 +482,10 @@ fn foo() -> Result<String, MyError> {
 ```
 
 </v-click>
+
+<!--
+There is a syntax sugar
+-->
 
 ---
 layout: center
@@ -523,6 +554,12 @@ layout: center
 
 ## Thank you
 
+---
+layout: cover
+background: ./sponsors.png
+---
+
+<!-- -->
 
 ---
 
