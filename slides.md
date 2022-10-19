@@ -361,7 +361,7 @@ fn take_read_only_ref(s: &String) {
 
 <!--
 
-TIME: 15m
+TIME: 20m
 
 -->
 
