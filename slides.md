@@ -64,12 +64,11 @@ Rust for hobby projects since 2020
 
 </v-clicks>
 
-
 <!--
 TIME: 45m
 
-* Pick two
 * No runtime/virtual machine
+* Core value proposition
 * High level abstractions
 * But complex and hard to learn
 -->
@@ -148,6 +147,7 @@ let dot = v1.dot(v2);
 <!--
 * no inheritance
 * static dispatch
+* inline
 -->
 
 ---
@@ -405,32 +405,6 @@ match x {
 <!--
 - Quote by Tony Hoare
 
--->
-
----
-
-## Errors
-
-<v-clicks>
-
-* Unrecoverable *panic*
-* Recoverable *error*
-
-</v-clicks>
-
----
-
-## Panic
-
-```rust
-let array = [0, 1, 2];
-let option: Option<&i32> = array.get(5); // None
-let value: &i32 = array[5]; // Panic!
-```
-
-<!--
-A panic, is an immediate crash of the software with a stack trace
-It cannot be recovered
 -->
 
 ---
