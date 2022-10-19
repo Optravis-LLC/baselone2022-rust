@@ -7,6 +7,7 @@ pkgs.mkShell {
     niv
     nodejs
     rust-bin.stable.latest.default
+    miniserve
   ];
 }
 
