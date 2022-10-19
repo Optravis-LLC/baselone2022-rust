@@ -485,26 +485,6 @@ layout: center
 </v-clicks>
 
 ---
-
-## A good fit for:
-
-<v-clicks>
-
-* Performance critical workloads
-* CLI applications
-* Backend services
-* System programing
-* Game developement
-
-</v-clicks>
-
-<!--
-* Fast
-* Reliable
-* Excellent tooling
--->
-
----
 layout: center
 ---
 
