@@ -16,5 +16,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npm install
+      - run: npm ci
       - run: npm run build
+      - run: npx playwright install --with-deps 
+      - run: npx slidev export slides.md --with-clicks
+      - run: mv slides-export.pdf build-trust-with-rust.pdf
+      - uses: actions/upload-artifact@v3
+        with:
+          path: build-trust-with-rust.pdf
