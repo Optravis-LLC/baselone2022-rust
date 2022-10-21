@@ -1,8 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base", "schedule:nonOfficeHours", ":automergeMinor"
+    "config:base", "schedule:nonOfficeHours", ":automergeMinor", ":semanticCommitTypeAll(chore)"
   ],
+  "enabled": false,
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
